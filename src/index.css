@@ -1,0 +1,150 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 91%;
+
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 91%;
+
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 91%;
+
+    --primary: 280 47% 46%;
+    --primary-foreground: 0 0% 91%;
+
+    --secondary: 240 5.9% 12%;
+    --secondary-foreground: 0 0% 91%;
+
+    --muted: 240 5.9% 12%;
+    --muted-foreground: 240 5% 65%;
+
+    --accent: 280 45% 35%;
+    --accent-foreground: 0 0% 91%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 91%;
+
+    --border: 240 5.9% 15%;
+    --input: 240 5.9% 15%;
+    --ring: 280 47% 46%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 240 10% 3.9%;
+    --sidebar-foreground: 0 0% 91%;
+    --sidebar-primary: 280 47% 46%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 5.9% 12%;
+    --sidebar-accent-foreground: 0 0% 91%;
+    --sidebar-border: 240 5.9% 15%;
+    --sidebar-ring: 280 47% 46%;
+  }
+
+  .light {
+    --background: 0 0% 98%;
+    --foreground: 240 10% 3.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+
+    --primary: 280 47% 46%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+
+    --accent: 280 45% 35%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 280 47% 46%;
+    
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 280 47% 46%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 280 47% 46%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  .progress-bar {
+    @apply h-2 bg-primary/20 rounded-full overflow-hidden;
+  }
+
+  .progress-bar-fill {
+    @apply h-full bg-primary animate-progress;
+  }
+}
+
+/* Futuristic UI styles */
+@layer components {
+  .neon-border {
+    @apply relative overflow-hidden rounded-lg;
+    background: linear-gradient(#121212, #121212) padding-box,
+                linear-gradient(90deg, #ff00ff, #8000ff, #00ffff, #ff00ff) border-box;
+    border: 2px solid transparent;
+    background-size: 300% 100%;
+    animation: border-flow 3s linear infinite;
+  }
+
+  .neon-button {
+    @apply relative rounded-lg overflow-hidden transition-all;
+    background: linear-gradient(#121212, #121212) padding-box,
+                linear-gradient(90deg, #ff00ff, #8000ff, #00ffff, #ff00ff) border-box;
+    border: 2px solid transparent;
+    background-size: 300% 100%;
+  }
+
+  .neon-button:hover {
+    box-shadow: 0 0 10px rgba(127, 66, 167, 0.8), 0 0 20px rgba(127, 66, 167, 0.4);
+    transform: translateY(-2px);
+  }
+
+  .feature-card {
+    @apply bg-futuristic-dark-gray rounded-lg p-6 transition-all duration-300;
+    border: 1px solid transparent;
+    background: linear-gradient(#181818, #181818) padding-box,
+                linear-gradient(135deg, rgba(127, 66, 167, 0.4), rgba(0, 255, 255, 0.1)) border-box;
+  }
+
+  .feature-card:hover {
+    box-shadow: 0 0 15px rgba(127, 66, 167, 0.3);
+    transform: translateY(-5px);
+    border: 1px solid transparent;
+    background: linear-gradient(#181818, #181818) padding-box,
+                linear-gradient(135deg, rgba(127, 66, 167, 0.8), rgba(0, 255, 255, 0.3)) border-box;
+  }
+
+  .heatmap-cell-0 { @apply bg-gray-800; }
+  .heatmap-cell-1 { @apply bg-futuristic-heatmap-1; }
+  .heatmap-cell-2 { @apply bg-futuristic-heatmap-2; }
+  .heatmap-cell-3 { @apply bg-futuristic-heatmap-3; }
+  .heatmap-cell-4 { @apply bg-futuristic-heatmap-4; }
+}
