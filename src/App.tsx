@@ -10,6 +10,7 @@ import TasksPage from "./pages/tasks";
 import CalendarPage from "./pages/calendar";
 import SettingsPage from "./pages/settings";
 import NotFound from "./pages/NotFound";
+import LandingPage from "./pages/Landing";
 import PricingPage from "./pages/PricingPage";
 const queryClient = new QueryClient();
 
@@ -22,6 +23,7 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/landing" element={<LandingPage />} />
             <Route path="/tasks" element={<TasksPage />} />
             <Route path="/calendar" element={<CalendarPage />} />
             <Route path="/settings" element={<SettingsPage />} />
