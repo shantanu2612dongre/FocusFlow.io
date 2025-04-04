@@ -14,6 +14,7 @@ import LandingPage from "./pages/Landing";
 import PricingPage from "./pages/PricingPage";
 import StickyNotesPage from "@/pages/StickyNotes";
 import LoginPage from "./pages/Login";
+import DashboardPage from './pages/DashboardPage';
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -24,7 +25,8 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Index />} />
+            <Route path="/" element={<Index/>} />
+            <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/landing" element={<LandingPage />} />
             <Route path="/tasks" element={<TasksPage />} />
             <Route path="/calendar" element={<CalendarPage />} />

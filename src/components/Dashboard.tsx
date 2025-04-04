@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Clock, Calendar, CheckCircle2, TrendingUp } from "lucide-react";
 
@@ -20,7 +19,7 @@ export function Dashboard({ stats }: DashboardProps) {
           <Clock className="h-4 w-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">{stats.totalHours}</div>
+          <div className="text-2xl font-bold">{stats.totalHours.toFixed(2)}</div>
           <p className="text-xs text-muted-foreground">Hours of deep work</p>
         </CardContent>
       </Card>

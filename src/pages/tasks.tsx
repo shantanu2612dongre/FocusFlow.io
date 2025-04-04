@@ -67,7 +67,7 @@ const TasksPage = () => {
             </motion.div>
             
             {/* Feature Cards */}
-            <motion.div 
+            {/* <motion.div 
               className="mt-10"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -107,7 +107,7 @@ const TasksPage = () => {
                   </motion.div>
                 ))}
               </div>
-            </motion.div>
+            </motion.div> */}
           </main>
           
          <Footer/>
