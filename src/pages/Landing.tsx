@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { Hero } from "@/components/landing/Hero";
 import { Features } from "@/components/landing/Features";
@@ -10,9 +9,17 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
+const scrollToSection = (id: string) => {
+  const section = document.getElementById(id);
+  if (section) {
+    section.scrollIntoView({ behavior: "smooth" });
+  }
+};
+
 const LandingPage = () => {
   return (
     <div className="min-h-screen bg-background">
+      {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm border-b border-futuristic-purple/20">
         <div className="container mx-auto px-4">
           <div className="flex h-16 items-center justify-between py-4">
@@ -25,18 +32,18 @@ const LandingPage = () => {
                 FocusFlow
               </Link>
             </motion.div>
-            
-            <div className="hidden md:flex items-center space-x-8">
-              <a href="#features" className="text-futuristic-text-primary hover:text-futuristic-purple transition-colors duration-200">Features</a>
-              <a href="#how-it-works" className="text-futuristic-text-primary hover:text-futuristic-purple transition-colors duration-200">How It Works</a>
-              <a href="#pricing" className="text-futuristic-text-primary hover:text-futuristic-purple transition-colors duration-200">Pricing</a>
-            </div>
-            
+
+            {/* Navigation */}
+            <nav className="hidden md:flex items-center space-x-8">
+              <button onClick={() => scrollToSection("features")} className="nav-link">Features</button>
+              <button onClick={() => scrollToSection("how-it-works")} className="nav-link">How It Works</button>
+              <button onClick={() => scrollToSection("pricing")} className="nav-link">Pricing</button>
+            </nav>
+
+            {/* Actions */}
             <div className="flex items-center gap-4">
               <Link to="/login">
-                <Button variant="ghost" className="hidden md:inline-flex">
-                  Login
-                </Button>
+                <Button variant="ghost" className="hidden md:inline-flex">Login</Button>
               </Link>
               <Link to="/">
                 <Button>Dashboard</Button>
@@ -46,15 +53,17 @@ const LandingPage = () => {
           </div>
         </div>
       </header>
-      
+
+      {/* Main Content */}
       <main className="pt-16">
-        <Hero />
-        <Features />
-        <HowItWorks />
-        <Testimonials />
-        <Cta />
+        <section id="hero"><Hero /></section>
+        <section id="features"><Features /></section>
+        <section id="how-it-works"><HowItWorks /></section>
+        <section id="testimonials"><Testimonials /></section>
+        <section id="pricing"><Cta /></section>
       </main>
-      
+
+      {/* Footer */}
       <Footer />
     </div>
   );

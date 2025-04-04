@@ -12,6 +12,8 @@ import SettingsPage from "./pages/settings";
 import NotFound from "./pages/NotFound";
 import LandingPage from "./pages/Landing";
 import PricingPage from "./pages/PricingPage";
+import StickyNotesPage from "@/pages/StickyNotes";
+import LoginPage from "./pages/Login";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -28,6 +30,11 @@ const App = () => (
             <Route path="/calendar" element={<CalendarPage />} />
             <Route path="/settings" element={<SettingsPage />} />
             <Route path="/pricing" element={<PricingPage />} />
+            <Route path="/sticky-notes" element={<StickyNotesPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            
+            
+
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

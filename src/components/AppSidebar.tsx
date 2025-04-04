@@ -4,7 +4,8 @@ import {
   CheckSquare, 
   CalendarDays, 
   Settings,
-  DollarSign 
+  DollarSign,
+  StickyNote
 } from "lucide-react";
 import { 
   Sidebar, 
@@ -33,6 +34,11 @@ const navItems = [
     path: "/tasks",
   },
   {
+    title: "Sticky Notes",
+    icon: StickyNote,
+    path: "/sticky-notes",
+  },
+  {
     title: "Calendar",
     icon: CalendarDays,
     path: "/calendar",
@@ -47,6 +53,7 @@ const navItems = [
     icon: DollarSign,
     path: "/pricing",
   },
+
 ];
 
 export function AppSidebar() {
