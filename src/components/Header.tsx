@@ -1,11 +1,16 @@
-
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { Bell, User } from "lucide-react";
+import { Bell, User, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { SidebarTrigger } from "@/components/ui/sidebar";
+import { supabase } from "@/lib/supabaseClient";
 
 export function Header() {
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    window.location.href = "/login";
+  };
+
   return (
     <motion.header 
       className="border-b border-futuristic-purple/20 sticky top-0 z-10 bg-futuristic-black/80 backdrop-blur-sm"
@@ -24,6 +29,7 @@ export function Header() {
             FocusFlow
           </span>
         </motion.div>
+
         <div className="flex items-center gap-2">
           <Button 
             variant="ghost" 
@@ -32,13 +38,17 @@ export function Header() {
           >
             <Bell className="h-5 w-5 transition-transform hover:scale-110 duration-200" />
           </Button>
+
           <Button 
             variant="ghost" 
             size="icon" 
             className="hover:bg-futuristic-purple/10 transition-colors duration-200 text-futuristic-text-primary"
+            onClick={handleLogout}
           >
-            <User className="h-5 w-5 transition-transform hover:scale-110 duration-200" />
+            <LogOut className="h-5 w-5 transition-transform hover:scale-110 duration-200" />
           </Button>
+          
+
           <ThemeToggle />
         </div>
       </div>
