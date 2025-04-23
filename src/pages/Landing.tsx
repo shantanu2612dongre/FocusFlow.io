@@ -8,6 +8,7 @@ import { Footer } from "@/components/landing/Footer";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import FocusStats from "@/components/landing/FocusStats";
 
 const scrollToSection = (id: string) => {
   const section = document.getElementById(id);
@@ -38,6 +39,7 @@ const LandingPage = () => {
               <button onClick={() => scrollToSection("features")} className="nav-link">Features</button>
               <button onClick={() => scrollToSection("how-it-works")} className="nav-link">How It Works</button>
               <button onClick={() => scrollToSection("pricing")} className="nav-link">Pricing</button>
+              <button onClick={() => scrollToSection("usecase")} className="nav-link">Use Cases</button>
             </nav>
 
             {/* Actions */}
@@ -56,12 +58,16 @@ const LandingPage = () => {
 
       {/* Main Content */}
       <main className="pt-16">
-        <section id="hero"><Hero /></section>
-        <section id="features"><Features /></section>
-        <section id="how-it-works"><HowItWorks /></section>
-        <section id="testimonials"><Testimonials /></section>
-        <section id="pricing"><Cta /></section>
-      </main>
+  <section id="hero"><Hero /></section>
+  <section id="features"><Features /></section>
+  
+  {/* Focus Stats Section */}
+  <section id="focus-stats"><FocusStats /></section>
+  
+  <section id="how-it-works"><HowItWorks /></section>
+  <section id="testimonials"><Testimonials /></section>
+  <section id="pricing"><Cta /></section>
+</main>
 
       {/* Footer */}
       <Footer />

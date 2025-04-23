@@ -18,6 +18,7 @@ import DashboardPage from "./pages/DashboardPage";
 import SignupPage from "./pages/Signup";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import { AuthProvider } from "@/components/AuthContext";
+import UseCasesPage from './pages/UseCasesPage'; 
 
 const queryClient = new QueryClient();
 
@@ -39,30 +40,32 @@ const App = () => (
 
                             {/* Protected Routes */}
                 <Route path="/dashboard" element={
-                  <ProtectedRoute>
+                  
                     <DashboardPage />
-                  </ProtectedRoute>
+
                 } />
                 <Route path="/tasks" element={
-                  <ProtectedRoute>
+
                     <TasksPage />
-                  </ProtectedRoute>
+
                 } />
                 <Route path="/calendar" element={
-                  <ProtectedRoute>
+
                     <CalendarPage />
-                  </ProtectedRoute>
+
                 } />
                 <Route path="/settings" element={
-                  <ProtectedRoute>
+
                     <SettingsPage />
-                  </ProtectedRoute>
+
                 } />
                 <Route path="/sticky-notes" element={
-                  <ProtectedRoute>
+                  
                     <StickyNotesPage />
-                  </ProtectedRoute>
+                  
                 } />
+              
+        <Route path="/use-cases" element={<UseCasesPage />} />
 
               {/* Catch-all 404 route */}
               <Route path="*" element={<NotFound />} />

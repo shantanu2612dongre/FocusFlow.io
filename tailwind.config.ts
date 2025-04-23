@@ -1,6 +1,7 @@
 
 import type { Config } from "tailwindcss";
 
+
 export default {
 	darkMode: ["class"],
 	content: [
@@ -151,7 +152,11 @@ export default {
 				'scale-up': {
 					'0%': { transform: 'scale(1)' },
 					'100%': { transform: 'scale(1.05)' }
-				}
+				},
+				'slide-up': {
+					'0%': { opacity: '0', transform: 'translateY(20px)' },
+					'100%': { opacity: '1', transform: 'translateY(0)' }
+				  },
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
@@ -163,7 +168,8 @@ export default {
 				// New animations
 				'glow-pulse': 'glow-pulse 2s ease-in-out infinite',
 				'border-flow': 'border-flow 3s ease infinite',
-				'scale-up': 'scale-up 0.2s ease-out forwards'
+				'scale-up': 'scale-up 0.2s ease-out forwards',
+				'slide-up': 'slide-up 1s ease-out forwards'
 			},
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

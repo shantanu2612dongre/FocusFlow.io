@@ -1,76 +1,86 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
-import { supabase } from "@/lib/supabaseClient"; // Adjust path if needed
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
-export default function SignupPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const SignupPage: React.FC = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate(); // Initialize useNavigate for navigation
 
-  const handleSignup = async (e: React.FormEvent) => {
+  const handleSignup = (e: React.FormEvent) => {
     e.preventDefault();
-
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
-    });
-
-    if (error) {
-      alert("Signup failed: " + error.message);
-    } else {
-      console.log("Signed up!", data);
-      alert("Signup successful! Please check your email for verification.");
-      window.location.href = "/login";
-    }
+    // Handle signup logic here
+    console.log('Signing up with:', name, email, password);
+    
+    // Redirect to login page after successful signup
+    navigate('/');
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-b from-background to-futuristic-black/80">
-      <motion.div 
-        initial={{ opacity: 0, y: -20 }} 
-        animate={{ opacity: 1, y: 0 }} 
-        transition={{ duration: 0.5 }}
-        className="w-full max-w-md bg-white dark:bg-gray-900 p-8 rounded-xl shadow-lg"
-      >
-        <h2 className="text-2xl font-bold text-center text-futuristic-purple">Create Account</h2>
-        <p className="text-center text-futuristic-text-secondary mb-6">Sign up to FocusFlow</p>
-        
-        <form onSubmit={handleSignup} className="space-y-4">
-          <div>
-            <label className="block text-gray-600 dark:text-gray-300">Email</label>
-            <input 
-              type="email" 
-              value={email} 
-              onChange={(e) => setEmail(e.target.value)} 
-              required 
-              className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-futuristic-purple bg-gray-100 dark:bg-gray-800 text-black dark:text-white"
+    <div className="h-screen w-screen bg-gradient-to-b from-black via-[#020617] to-black flex items-center justify-center px-4">
+      <div className="bg-[#1f2937] shadow-2xl rounded-2xl w-full max-w-6xl h-auto md:h-[80%] flex flex-col md:flex-row overflow-hidden">
+        {/* Left Section - Lure Text */}
+        <div className="md:w-1/2 w-full bg-gradient-to-b from-black via-[#020617] to-black text-white p-8 md:p-10 flex flex-col justify-center items-center text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 animate__animated animate__fadeIn">Why FocusFlow?</h2>
+          <p className="text-xl md:text-2xl mb-6 animate__animated animate__fadeIn animate__delay-1s">
+            Focus on what matters and unlock your full potential.
+          </p>
+          <ul className="space-y-2 text-lg md:text-xl animate__animated animate__fadeIn animate__delay-2s">
+            <li>⚡ Boost your productivity with focus tracking</li>
+            <li>🧠 Break free from distractions</li>
+            <li>⏱️ Track and optimize your work sessions</li>
+            <li>🌱 Build healthy work habits</li>
+          </ul>
+        </div>
+
+        {/* Right Section - Sign up Form */}
+        <div className="md:w-1/2 w-full p-8 md:p-10 flex flex-col justify-center relative">
+          {/* Transparent Background div */}
+          <div className="absolute inset-0 bg-blue opacity-60 rounded-2xl"></div>
+          
+          {/* Form and content */}
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-6 relative z-10">Create an Account</h2>
+
+          <form onSubmit={handleSignup} className="flex flex-col gap-6 relative z-10">
+            <input
+              type="text"
+              placeholder="Enter your full name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="p-3 border border-gray-700 bg-gray-800 text-white rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600"
             />
-          </div>
-
-          <div>
-            <label className="block text-gray-600 dark:text-gray-300">Password</label>
-            <input 
-              type="password" 
-              value={password} 
-              onChange={(e) => setPassword(e.target.value)} 
-              required 
-              className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-futuristic-purple bg-gray-100 dark:bg-gray-800 text-black dark:text-white"
+            <input
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="p-3 border border-gray-700 bg-gray-800 text-white rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600"
             />
-          </div>
+            <input
+              type="password"
+              placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="p-3 border border-gray-700 bg-gray-800 text-white rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600"
+            />
+            <button
+              type="submit"
+              className="bg-purple-600 text-white py-3 rounded-xl hover:bg-purple-700 transition-all duration-300"
+            >
+              Sign Up
+            </button>
+          </form>
 
-          <button 
-            type="submit" 
-            className="w-full py-2 mt-4 bg-futuristic-purple text-white rounded-lg font-semibold hover:bg-opacity-90 transition"
-          >
-            Sign Up
-          </button>
-        </form>
-
-        <p className="mt-4 text-center text-gray-600 dark:text-gray-400">
-          Already have an account? 
-          <Link to="/login" className="text-futuristic-purple hover:underline ml-1">Login</Link>
-        </p>
-      </motion.div>
+          <p className="text-sm mt-6 text-gray-400 text-center relative z-10">
+            Already have an account?{" "}
+            <a href="/" className="text-purple-600 font-semibold hover:underline">
+              Login
+            </a>
+          </p>
+        </div>
+      </div>
     </div>
   );
-}
+};
+
+export default SignupPage;
