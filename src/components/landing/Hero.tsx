@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-
+import { Link } from "react-router-dom";
 export function Hero() {
   return (
     <section className="relative w-full overflow-hidden py-20 md:py-32">
@@ -28,9 +28,11 @@ export function Hero() {
               A powerful deep work timer designed to enhance productivity and track your focused sessions.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link to="/">
               <Button size="lg" className="neon-button px-8 py-6">
                 Get Started for Free
               </Button>
+              </Link>
               <Button size="lg" variant="outline" className="px-8 py-6 border-futuristic-purple/40 hover:border-futuristic-purple hover:bg-futuristic-purple/5">
                 Learn More
                 <ArrowRight className="ml-2 h-5 w-5" />

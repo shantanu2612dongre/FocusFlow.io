@@ -45,10 +45,7 @@ const LandingPage = () => {
             {/* Actions */}
             <div className="flex items-center gap-4">
               <Link to="/login">
-                <Button variant="ghost" className="hidden md:inline-flex">Login</Button>
-              </Link>
-              <Link to="/">
-                <Button>Dashboard</Button>
+                <Button variant="ghost" className="neon-button px-8 py-6">Login</Button>
               </Link>
               <ThemeToggle />
             </div>

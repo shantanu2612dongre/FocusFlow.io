@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { supabase } from '../../supabaseClient';
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -6,10 +6,8 @@ const LoginPage: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle login logic here
     console.log('Logging in with:', email, password);
 
-    // Email login logic (for email/password-based login)
     const { user, error } = await supabase.auth.signInWithPassword({
       email,
       password,
@@ -20,17 +18,50 @@ const LoginPage: React.FC = () => {
       console.log('Logged in user:', user);
     }
   };
-
   const handleOAuthLogin = async (provider: 'google' | 'facebook') => {
-    const { user, error } = await supabase.auth.signInWithOAuth({
+    const { error } = await supabase.auth.signInWithOAuth({
       provider,
+      options: {
+        redirectTo: window.location.origin,
+      },
     });
     if (error) {
       console.error(`Error logging in with ${provider}:`, error.message);
-    } else {
-      console.log(`Logged in via ${provider}:`, user);
     }
   };
+  const syncUserToDB = async (user: any) => {
+    const { id, email, user_metadata } = user;
+    const name = user_metadata?.full_name || user_metadata?.name || user.email.split('@')[0];
+  
+    const { data, error } = await supabase
+      .from('profiles')
+      .upsert([
+        {
+          id: id,
+          email: email,
+          full_name: name,
+        },
+      ]);
+  
+    if (error) {
+      console.error('Error saving user:', error.message);
+    } else {
+      console.log('User synced to DB:', data);
+    }
+  };
+  useEffect(() => {
+    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
+      if (session) {
+        const user = session.user;
+        console.log('Logged in user:', user);
+        syncUserToDB(user); // 👈 Add this
+      }
+    });
+  
+    return () => {
+      authListener?.unsubscribe();
+    };
+  }, []);
 
   return (
     <div className="h-screen w-screen bg-gradient-to-b from-black via-[#020617] to-black flex items-center justify-center px-4">
@@ -54,19 +85,19 @@ const LoginPage: React.FC = () => {
           <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-6">Welcome Back 👋</h2>
 
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-            <input
-              type="email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600"
-            />
+          <input
+  type="email"
+  placeholder="Enter your email"
+  value={email}
+  onChange={(e) => setEmail(e.target.value)}
+  className="p-3 border border-white-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 text-black"
+/>
             <input
               type="password"
               placeholder="Enter your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600"
+              className="p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 text-black"
             />
             <button
               type="submit"
@@ -86,14 +117,14 @@ const LoginPage: React.FC = () => {
           <div className="flex flex-col gap-3">
             <button
               onClick={() => handleOAuthLogin('google')}
-              className="flex items-center justify-center gap-3 bg-white border border-gray-300 py-2 rounded-xl hover:shadow transition-all"
+              className="flex items-center justify-center gap-3 bg-grey border border-gray-300 py-2 rounded-xl hover:shadow transition-all"
             >
               <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" className="w-5 h-5" />
               <span>Continue with Google</span>
             </button>
             <button
               onClick={() => handleOAuthLogin('facebook')}
-              className="flex items-center justify-center gap-3 bg-white border border-gray-300 py-2 rounded-xl hover:shadow transition-all"
+              className="flex items-center justify-center gap-3 bg-grey border border-gray-300 py-2 rounded-xl hover:shadow transition-all"
             >
               <img src="https://www.svgrepo.com/show/452196/facebook-1.svg" alt="Facebook" className="w-5 h-5" />
               <span>Continue with Facebook</span>
