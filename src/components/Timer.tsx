@@ -10,6 +10,34 @@ import { Input } from "@/components/ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Label } from "@/components/ui/label";
 import { motion, AnimatePresence } from "framer-motion";
+import { supabase } from "@/supabaseClient"; // make sure this path is correct
+
+async function logDeepWorkSession(durationMinutes: number) {
+  const {
+    data: { user },
+    error: userError
+  } = await supabase.auth.getUser();
+
+  if (userError || !user) {
+    console.error("User not authenticated:", userError);
+    return;
+  }
+
+  const { error: insertError } = await supabase.from("sessions").insert([
+    {
+      user_id: user.id,
+      duration_minutes: durationMinutes,
+      tasks_completed: 0, // or update this if you're tracking tasks
+      date: new Date().toISOString()
+    }
+  ]);
+
+  if (insertError) {
+    console.error("Failed to insert session:", insertError);
+  } else {
+    console.log("Session logged to Supabase!");
+  }
+}
 
 interface TimerProps {
   onSessionComplete: (sessionType: string, duration: number) => void;
@@ -48,7 +76,12 @@ export function Timer({ onSessionComplete }: TimerProps) {
     if (timeLeft === 0) {
       setIsActive(false);
       onSessionComplete(mode, initialTime);
-      
+  
+      if (mode === "work") {
+        const durationInMinutes = Math.round(initialTime / 60);
+        logDeepWorkSession(durationInMinutes);
+      }
+  
       // Switch modes
       if (mode === "work") {
         setMode("rest");
