@@ -9,7 +9,7 @@ export function StickyNotes() {
   });
 
   const addNote = () => {
-    setNotes([...notes, "New Note"]);
+    setNotes([...notes, ""]);
   };
 
   const updateNote = (index: number, text: string) => {
@@ -28,9 +28,8 @@ export function StickyNotes() {
   }, [notes]);
 
   return (
-    <div className="p-4">
+    <div className="p-5">
       <div className="flex justify-between items-center mb-4">
-        {/* <h2 className="text-xl font-bold">Sticky Notes</h2> */}
         <button
           onClick={addNote}
           className="p-2 bg-futuristic-purple text-white rounded-md hover:bg-opacity-80"

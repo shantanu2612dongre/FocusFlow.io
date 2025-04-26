@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Label } from "@/components/ui/label";
 import { motion, AnimatePresence } from "framer-motion";
-import { supabase } from "@/supabaseClient"; // make sure this path is correct
+import { supabase } from "@/lib/supabaseClient"; // make sure this path is correct
 
 async function logDeepWorkSession(durationMinutes: number) {
   const {

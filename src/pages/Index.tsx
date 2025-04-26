@@ -11,7 +11,7 @@ import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
-import { supabase } from "../supabaseClient";
+import { supabase } from "@/lib/supabaseClient";
 
 const Index = () => {
   const [stats, setStats] = useState({
@@ -67,7 +67,7 @@ const Index = () => {
 
           <main className="flex-1 container mx-auto py-6 px-4 md:px-6">
             <div className="mb-8">
-              <h1 className="text-3xl font-bold mb-2 text-align-center">Welcome to FocusFlow</h1>
+              <h1 className="text-3xl font-bold mb-2">Welcome to FocusFlow</h1>
               {userName && (
                 <p className="text-lg text-muted-foreground">Hello, {userName}! 👋</p>
               )}
